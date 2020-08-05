@@ -107,7 +107,7 @@ value from [http://apachemirror.wuchna.com/flink/](http://apachemirror.wuchna.co
             <comment>Apache Flink is a streaming dataflow engine that provides data distribution, communication, and fault tolerance for distributed computations over data streams.</comment>
             <version>1.9.0</version>
  ```
- vsersion = your flink version
+ vsersion =1.11.1
  
 #### Flink on Yarn
 - metainfo.xml
@@ -126,7 +126,7 @@ value from [http://apachemirror.wuchna.com/flink/](http://apachemirror.wuchna.co
 hdp-select status hadoop-client
 hadoop-client - <version>
 ```
-- hadodp_conf_dir = /etc/hadoop/<version>/0
+- hadodp_conf_dir = /etc/hadoop/3.1.0.0-78/0
 
 
 #### Use Flink
