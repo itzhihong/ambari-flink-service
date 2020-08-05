@@ -65,7 +65,7 @@ class Master(Script):
       Execute('cd '+params.flink_install_dir+'; git clone https://github.com/apache/flink.git '+params.flink_install_dir +' >> ' + params.flink_log_file)
       Execute('chown -R ' + params.flink_user + ':' + params.flink_group + ' ' + params.flink_install_dir)
                 
-      Execute('cd '+params.flink_install_dir+'; mvn clean install -DskipTests -Dhadoop.version=2.7.1.2.3.2.0-2950 -Pvendor-repos >> ' + params.flink_log_file, user=params.flink_user)
+      Execute('cd '+params.flink_install_dir+'; mvn clean install -DskipTests -Dhadoop.version=3.1.0.0-78 -Pvendor-repos >> ' + params.flink_log_file, user=params.flink_user)
       
       #update the configs specified by user
       self.configure(env, True)
@@ -110,7 +110,7 @@ class Master(Script):
     cmd = format("export HADOOP_CONF_DIR={hadoop_conf_dir}; export HADOOP_CLASSPATH={hadoop_classpath}; {bin_dir}/yarn-session.sh -n {flink_numcontainers} -s {flink_numberoftaskslots} -jm {flink_jobmanager_memory} -tm {flink_container_memory} -qu {flink_queue} -nm {flink_appname} -d")
     if params.flink_streaming:
       cmd = cmd + ' -st '
-    Execute (cmd + format(" >> {flink_log_file}"), user=params.flink_user)
+    Execute (cmd + format(" >> {flink_log_file} &"), user=params.flink_user)
     Execute("yarn application -list 2>/dev/null | awk '/" + params.flink_appname + "/ {print $1}' | head -n1 > " + status_params.flink_pid_file, user=params.flink_user)
     #Execute('chown '+params.flink_user+':'+params.flink_group+' ' + status_params.flink_pid_file)
 
